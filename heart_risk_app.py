@@ -39,7 +39,7 @@ import matplotlib.font_manager as fm  # 新增：导入字体管理器
 # ==========================================
 # 动态字体加载逻辑 (适配云端 Linux 环境)
 # ==========================================
-font_path = "msyh.ttc"  # 指定你上传的字体文件名
+font_path = "NotoSansSC-Regular.ttf"  # 指定你上传的字体文件名
 
 if os.path.exists(font_path):
     # 如果找到了字体文件，强制注册到系统并设置为默认
