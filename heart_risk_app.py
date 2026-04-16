@@ -34,9 +34,23 @@ import shap
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-matplotlib.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei", "DejaVu Sans", "Arial Unicode MS"]
-matplotlib.rcParams["axes.unicode_minus"] = False
+import matplotlib.font_manager as fm  # 新增：导入字体管理器
 
+# ==========================================
+# 动态字体加载逻辑 (适配云端 Linux 环境)
+# ==========================================
+font_path = "msyh.ttc"  # 指定你上传的字体文件名
+
+if os.path.exists(font_path):
+    # 如果找到了字体文件，强制注册到系统并设置为默认
+    fm.fontManager.addfont(font_path)
+    prop = fm.FontProperties(fname=font_path)
+    matplotlib.rcParams["font.sans-serif"] = [prop.get_name()]
+else:
+    # 备用方案：如果文件不存在（例如在你自己的本地电脑上运行），则使用系统默认字体
+    matplotlib.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei", "DejaVu Sans", "Arial Unicode MS"]
+
+matplotlib.rcParams["axes.unicode_minus"] = False
 
 # =========================================================
 # 1. 全局常量
